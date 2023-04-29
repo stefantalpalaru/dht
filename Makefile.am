@@ -7,5 +7,8 @@ noinst_HEADERS = dht.h
 EXTRA_DIST = CHANGES CMakeLists.txt dht-example.c LICENCE README
 
 $(builddir)/include/dht:
-	$(MKDIR_P) $(builddir)/include
-	(cd $(builddir)/include && $(LN_S) $(abs_srcdir) dht)
+	$(MKDIR_P) $(builddir)/include/dht
+	cp -a dht.h $(builddir)/include/dht/
+
+clean-local:
+	-rm -rf $(builddir)/include

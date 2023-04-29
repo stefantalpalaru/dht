@@ -605,8 +605,8 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-generic clean-libtool clean-noinstLIBRARIES \
-	mostlyclean-am
+clean-am: clean-generic clean-libtool clean-local \
+	clean-noinstLIBRARIES mostlyclean-am
 
 distclean: distclean-am
 		-rm -f ./$(DEPDIR)/dht.Po
@@ -677,7 +677,7 @@ uninstall-am:
 .MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am am--depfiles check check-am clean \
-	clean-generic clean-libtool clean-noinstLIBRARIES \
+	clean-generic clean-libtool clean-local clean-noinstLIBRARIES \
 	cscopelist-am ctags ctags-am distclean distclean-compile \
 	distclean-generic distclean-libtool distclean-tags distdir dvi \
 	dvi-am html html-am info info-am install install-am \
@@ -694,8 +694,11 @@ uninstall-am:
 
 
 $(builddir)/include/dht:
-	$(MKDIR_P) $(builddir)/include
-	(cd $(builddir)/include && $(LN_S) $(abs_srcdir) dht)
+	$(MKDIR_P) $(builddir)/include/dht
+	cp -a dht.h $(builddir)/include/dht/
+
+clean-local:
+	-rm -rf $(builddir)/include
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
