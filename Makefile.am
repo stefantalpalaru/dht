@@ -3,7 +3,16 @@ AM_CFLAGS = @PTHREAD_CFLAGS@
 noinst_LIBRARIES = libdht.a
 libdht_a_SOURCES = dht.c dht.h
 libdht_a_DEPENDENCIES = $(builddir)/include/dht
-EXTRA_DIST = CHANGES CMakeLists.txt dht-example.c LICENCE README
+
+EXTRA_DIST = \
+	     CHANGES \
+	     CMakeLists.txt \
+	     LICENCE \
+	     README \
+	     dht-example.c \
+	     include
+
+BUILT_SOURCES = $(builddir)/include/dht
 
 $(builddir)/include/dht:
 	$(MKDIR_P) $(builddir)/include/dht
