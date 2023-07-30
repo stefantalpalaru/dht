@@ -103,16 +103,14 @@ DIST_COMMON = $(srcdir)/Makefile.am $(am__DIST_COMMON)
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-LIBRARIES = $(noinst_LIBRARIES)
-ARFLAGS = cru
-AM_V_AR = $(am__v_AR_@AM_V@)
-am__v_AR_ = $(am__v_AR_@AM_DEFAULT_V@)
-am__v_AR_0 = @echo "  AR      " $@;
-am__v_AR_1 = 
-libdht_a_AR = $(AR) $(ARFLAGS)
-libdht_a_LIBADD =
-am_libdht_a_OBJECTS = dht.$(OBJEXT)
-libdht_a_OBJECTS = $(am_libdht_a_OBJECTS)
+LTLIBRARIES = $(noinst_LTLIBRARIES)
+libdht_la_LIBADD =
+am_libdht_la_OBJECTS = dht.lo
+libdht_la_OBJECTS = $(am_libdht_la_OBJECTS)
+AM_V_lt = $(am__v_lt_@AM_V@)
+am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
+am__v_lt_0 = --silent
+am__v_lt_1 = 
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -128,14 +126,10 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/dht.Po
+am__depfiles_remade = ./$(DEPDIR)/dht.Plo
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-AM_V_lt = $(am__v_lt_@AM_V@)
-am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
-am__v_lt_0 = --silent
-am__v_lt_1 = 
 LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
 	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
@@ -152,8 +146,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libdht_a_SOURCES)
-DIST_SOURCES = $(libdht_a_SOURCES)
+SOURCES = $(libdht_la_SOURCES)
+DIST_SOURCES = $(libdht_la_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -213,7 +207,7 @@ DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DHT_CFLAGS = @DHT_CFLAGS@
 DHT_LIBS = @DHT_LIBS@
-DHT_LIBS_QT = @DHT_LIBS_QT@
+DHT_LIBS_QMAKE = @DHT_LIBS_QMAKE@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DUMPBIN = @DUMPBIN@
@@ -256,27 +250,27 @@ LIBAPPINDICATOR_LIBS = @LIBAPPINDICATOR_LIBS@
 LIBAPPINDICATOR_MINIMUM = @LIBAPPINDICATOR_MINIMUM@
 LIBB64_CFLAGS = @LIBB64_CFLAGS@
 LIBB64_LIBS = @LIBB64_LIBS@
-LIBB64_LIBS_QT = @LIBB64_LIBS_QT@
+LIBB64_LIBS_QMAKE = @LIBB64_LIBS_QMAKE@
 LIBCURL_CFLAGS = @LIBCURL_CFLAGS@
 LIBCURL_LIBS = @LIBCURL_LIBS@
 LIBEVENT_CFLAGS = @LIBEVENT_CFLAGS@
-LIBEVENT_INCLUDEPATH_QT = @LIBEVENT_INCLUDEPATH_QT@
+LIBEVENT_INCLUDEPATH_QMAKE = @LIBEVENT_INCLUDEPATH_QMAKE@
 LIBEVENT_LIBS = @LIBEVENT_LIBS@
-LIBEVENT_LIBS_QT = @LIBEVENT_LIBS_QT@
+LIBEVENT_LIBS_QMAKE = @LIBEVENT_LIBS_QMAKE@
 LIBEVENT_MINIMUM = @LIBEVENT_MINIMUM@
 LIBM = @LIBM@
 LIBNATPMP_CFLAGS = @LIBNATPMP_CFLAGS@
 LIBNATPMP_LIBS = @LIBNATPMP_LIBS@
-LIBNATPMP_LIBS_QT = @LIBNATPMP_LIBS_QT@
+LIBNATPMP_LIBS_QMAKE = @LIBNATPMP_LIBS_QMAKE@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
 LIBUPNP_CFLAGS = @LIBUPNP_CFLAGS@
 LIBUPNP_LIBS = @LIBUPNP_LIBS@
-LIBUPNP_LIBS_QT = @LIBUPNP_LIBS_QT@
+LIBUPNP_LIBS_QMAKE = @LIBUPNP_LIBS_QMAKE@
 LIBUTP_CFLAGS = @LIBUTP_CFLAGS@
 LIBUTP_LIBS = @LIBUTP_LIBS@
-LIBUTP_LIBS_QT = @LIBUTP_LIBS_QT@
+LIBUTP_LIBS_QMAKE = @LIBUTP_LIBS_QMAKE@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
@@ -414,9 +408,9 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 transmissionlocaledir = @transmissionlocaledir@
 AM_CFLAGS = @PTHREAD_CFLAGS@
-noinst_LIBRARIES = libdht.a
-libdht_a_SOURCES = dht.c dht.h
-libdht_a_DEPENDENCIES = $(builddir)/include/dht
+noinst_LTLIBRARIES = libdht.la
+libdht_la_SOURCES = dht.c dht.h
+libdht_la_DEPENDENCIES = $(builddir)/include/dht
 EXTRA_DIST = \
 	     CHANGES \
 	     CMakeLists.txt \
@@ -461,13 +455,19 @@ $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 
-clean-noinstLIBRARIES:
-	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+clean-noinstLTLIBRARIES:
+	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
+	@list='$(noinst_LTLIBRARIES)'; \
+	locs=`for p in $$list; do echo $$p; done | \
+	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
+	      sort -u`; \
+	test -z "$$locs" || { \
+	  echo rm -f $${locs}; \
+	  rm -f $${locs}; \
+	}
 
-libdht.a: $(libdht_a_OBJECTS) $(libdht_a_DEPENDENCIES) $(EXTRA_libdht_a_DEPENDENCIES) 
-	$(AM_V_at)-rm -f libdht.a
-	$(AM_V_AR)$(libdht_a_AR) libdht.a $(libdht_a_OBJECTS) $(libdht_a_LIBADD)
-	$(AM_V_at)$(RANLIB) libdht.a
+libdht.la: $(libdht_la_OBJECTS) $(libdht_la_DEPENDENCIES) $(EXTRA_libdht_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(LINK)  $(libdht_la_OBJECTS) $(libdht_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -475,7 +475,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dht.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dht.Plo@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -600,7 +600,7 @@ distdir-am: $(DISTFILES)
 check-am: all-am
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-am
-all-am: Makefile $(LIBRARIES)
+all-am: Makefile $(LTLIBRARIES)
 installdirs:
 install: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) install-am
@@ -638,10 +638,10 @@ maintainer-clean-generic:
 clean: clean-am
 
 clean-am: clean-generic clean-libtool clean-local \
-	clean-noinstLIBRARIES mostlyclean-am
+	clean-noinstLTLIBRARIES mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/dht.Po
+		-rm -f ./$(DEPDIR)/dht.Plo
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -687,7 +687,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/dht.Po
+		-rm -f ./$(DEPDIR)/dht.Plo
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -709,18 +709,18 @@ uninstall-am:
 .MAKE: all check install install-am install-exec install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am am--depfiles check check-am clean \
-	clean-generic clean-libtool clean-local clean-noinstLIBRARIES \
-	cscopelist-am ctags ctags-am distclean distclean-compile \
-	distclean-generic distclean-libtool distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-man install-pdf \
-	install-pdf-am install-ps install-ps-am install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am
+	clean-generic clean-libtool clean-local \
+	clean-noinstLTLIBRARIES cscopelist-am ctags ctags-am distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am
 
 .PRECIOUS: Makefile
 

@@ -1,8 +1,8 @@
 AM_CFLAGS = @PTHREAD_CFLAGS@
 
-noinst_LIBRARIES = libdht.a
-libdht_a_SOURCES = dht.c dht.h
-libdht_a_DEPENDENCIES = $(builddir)/include/dht
+noinst_LTLIBRARIES = libdht.la
+libdht_la_SOURCES = dht.c dht.h
+libdht_la_DEPENDENCIES = $(builddir)/include/dht
 
 EXTRA_DIST = \
 	     CHANGES \
